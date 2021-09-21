@@ -7,21 +7,37 @@ const menuListRef = document.querySelector('.js-menu');
 const themeSwitcherRef = document.querySelector('.theme-switch__toggle');
 const menuMarkup = createMenuMarkup(menu);
 
+let theme = bodyRef.classList.add('light-theme');
+
+loadSavedTheme();
 
 menuListRef.insertAdjacentHTML('afterbegin', menuMarkup);
-
-bodyRef.classList.add('light-theme');
-
-themeSwitcherRef.addEventListener('change', onSwitcherChangeTheme)
+themeSwitcherRef.addEventListener('change', onSwitcherChangeTheme);
 
 
 function createMenuMarkup(menu) {
   return menu.map(cardTemplate).join('');
 }
 
-function onSwitcherChangeTheme(event) {
-  bodyRef.classList.toggle('dark-theme');
-  if (bodyRef.classList.contains('dark-theme')) {
-    themeSwitcherRef.checked = true;    
+function onSwitcherChangeTheme(evt) {
+  bodyRef.classList.contains('light-theme') ? makeDarkTheme(): makeLightTheme();
+}
+
+function makeDarkTheme() {
+  bodyRef.classList.replace('light-theme', 'dark-theme');
+  themeSwitcherRef.checked = true;
+  localStorage.setItem('theme', 'dark');
+}
+
+function makeLightTheme() {
+  bodyRef.classList.replace('dark-theme', 'light-theme');
+  themeSwitcherRef.checked = false;
+  localStorage.removeItem('theme');
+}
+
+function loadSavedTheme() {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    return makeDarkTheme();
   }
 }

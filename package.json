@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "parcel ./src/index.html",
-    "build": "parcel build ./src/index.html"
+    "build": "parcel build src/index.html --public-url /goit-js-hw-10-food-service/",
+    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build" 
   },
   "repository": {
     "type": "git",
@@ -16,12 +18,14 @@
   "bugs": {
     "url": "https://github.com/ViraKolesnikova/goit-js-hw-10-food-service/issues"
   },
-  "homepage": "https://github.com/ViraKolesnikova/goit-js-hw-10-food-service#readme",
+  "homepage": "https://ViraKolesnikova.github.io/goit-js-hw-10-food-service",
   "devDependencies": {
     "parcel-bundler": "^1.12.5",
     "parcel-plugin-handlebars-precompile": "^1.0.2"
   },
   "dependencies": {
-    "handlebars": "^4.7.7"
+    "gh-pages": "^3.2.3",
+    "handlebars": "^4.7.7",
+    "parcel-plugin-nuke-dist": "^1.0.1"
   }
 }
